@@ -12,8 +12,8 @@ namespace PDFToText
     {
         static void Main(string[] args)
         {
-            var outputPdfPath = @"output.pdf";
-            List<Image> images = PdfSplitter.GetImages(outputPdfPath, PdfSplitter.Scale.High);
+            var inputPdfPath = @"input.pdf";
+            List<Image> images = PdfSplitter.GetImages(inputPdfPath, PdfSplitter.Scale.High);
             var resText = "";
             //Tesseract ile imageları text haline getiriyoruz.
             string tessDataDir = @"tessdata";
