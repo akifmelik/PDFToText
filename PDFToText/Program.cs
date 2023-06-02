@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Pdf2Image;
 using System.IO;
 using System;
+using System.Text;
 
 namespace PDFToText
 {
@@ -14,7 +15,7 @@ namespace PDFToText
         {
             var inputPdfPath = @"input.pdf";
             List<Image> images = PdfSplitter.GetImages(inputPdfPath, PdfSplitter.Scale.High);
-            var resText = "";
+            var resText = new StringBuilder();
           
             string tessDataDir = @"tessdata";
             using (var engine = new TesseractEngine(tessDataDir, "tur", EngineMode.Default))
@@ -28,7 +29,7 @@ namespace PDFToText
                         using (var imageByte = Pix.LoadFromMemory(msImg.GetBuffer()))
                         using (var page = engine.Process(imageByte))
                         {
-                            resText += page.GetText();
+                            resText.Append(page.GetText());
                         }
                     }
                 }
